@@ -1,0 +1,86 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<html>
+<head>
+	<title>inputForm1</title>
+	<style>
+		table {
+			width:700;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			font-family: 'Times New Roman', Times, serif;
+			font-size: 30px;
+			margin-top: 5%;
+		}
+		body {
+			background-image: url('./tablebg.png');
+		}
+		h1 {
+			font-family: 'Times New Roman', Times, serif;
+			font-size: 50px;
+			text-align: center;
+			margin-top: 20%;
+		}
+		#submit{
+			border: 1px solid yellowgreen;
+			font-size: 30px;
+		}
+	</style>
+	<!-- 한글과 영어 이름만 가능하도록, 특수문자나 숫자, 띄어쓰기 입력 방지를 위한 함수 -->
+	<script>    
+		function characterCheck(obj){
+			var reg = /[\{\}\[\]\/?.,;:|\-_+<>@\#$%&\'\"\\\()\=`~!^*123456789\s]/gi;
+			if (reg.test(obj.value)){
+				alert("특수문자나 숫자, 띄어쓰기는 입력하실수 없습니다.");
+				obj.value = obj.value.substring(0,0);
+			}
+		}
+		window.onload = function() {
+		document.querySelector('form').addEventListener('submit', function(e){
+			if(document.getElementById('name').value == '' || 
+			document.getElementById('korean').value == '' || 
+			document.getElementById('english').value == '' || 
+			document.getElementById('math').value == ''){
+				e.preventDefault()//이름 미입력을 방지
+				alert('입력란을 모두 입력하세요')} 
+		});
+		}
+	</script>
+</head>
+<body>
+	<h1>성적입력추가</h1>
+	<!-- post방식으로 insertDB.jsp 파일로 입력값을 보낸다. -->
+	<form method = "post" action = "insertDB.jsp">
+		<table cellspacing=1>
+			<tr>
+				<td width=550></td>
+				<td width=100><input type = "submit" id = "submit" value = "추가"></td>
+			</tr>
+		</table>
+		
+		<table border = 1, black>
+			<tr>
+				<td width=100 align=center>이름</td>
+				<td width=550 align=center><input type = "text" id = "name" onkeyup = "characterCheck(this)" name = "name" maxlength = "10" /></td>
+			</tr>
+			<tr>
+				<td width=100 align=center>학번</td>
+				<td width=550 align=center>자동부여</td>
+			</tr>
+			<!-- 성적점수는 숫자만 입력 가능하며 0~100사이 점수만 가능 -->
+			<tr>
+				<td width=100 align=center>국어</td>
+				<td width=550 align=center><input size=20 type = "number" id = "korean" name = "korean" min = 0 max = 100 /></td> 
+			</tr>
+			<tr>
+				<td width=100 align=center>영어</td>
+				<td width=550 align=center><input type = "number" id = "english" name = "english" min = 0 max = 100 /></td>
+			</tr>
+			<tr>
+				<td width=100 align=center>수학</td>
+				<td width=550 align=center><input type = "number" id = "math" name = "math" min = 0 max = 100 /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
