@@ -1,0 +1,74 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<html>
+<head>
+	<title>inputForm2</title>
+	<style>
+		table {
+			width:700;
+			text-align: center;
+			margin-left: auto;
+			margin-right: auto;
+			font-family: 'Times New Roman', Times, serif;
+			font-size: 30px;
+			margin-top: 5%;
+		}
+		body {
+			background-image: url('./tablebg.png');
+		}
+		h1 {
+			font-family: 'Times New Roman', Times, serif;
+			font-size: 50px;
+			text-align: center;
+			margin-top: 20%;
+		}
+		#submit{
+			border: 1px solid yellowgreen;
+			font-size: 30px;
+		}
+	</style>
+	<script>
+		function characterCheck(obj){
+			var reg = /[a-z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣\{\}\[\]\/?.,;:|\-_+<>@\#$%&\'\"\\\()\=`~!^*\s]/gi;
+			if (reg.test(obj.value)){
+				alert("숫자만 입력하실수 있습니다.");
+				obj.value = obj.value.substring(0,0);
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>성적 조회후 정정/삭제</h1>
+	<!-- post방식으로 조회를 누를 경우 name요소 search의 값, 학번을 showREC.jsp로 보낸다.-->
+	<form method = "post" action = "showREC.jsp">
+		<table>
+		<tr>
+			<td>조회할 학번</td>
+			<td><input type = text name = "search" min = "209901" onkeyup = "characterCheck(this)" required /></td>
+			<td><input type = "submit" id="submit" value = "조회"></td>
+			</tr>
+		</table>
+		<table border = 1, black>
+			<tr>
+				<td width = 100>이름</td>
+				<td width = 300><input type = "text" name = "studentname" readonly /></td>
+			</tr>
+			<tr>
+				<td width = 100>학번</td>
+				<td width = 300></td>
+			</tr>
+			<tr>
+				<td width = 100>국어</td>
+				<td width = 300><input type = "number" name = "korean" readonly /></td>
+			</tr>
+			<tr>
+				<td width = 100>영어</td>
+				<td width = 300><input type = "number" name = "english" readonly /></td>
+			</tr>
+			<tr>
+				<td width = 100>수학</td>
+				<td width = 300><input type = "number" name = "math" readonly /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
